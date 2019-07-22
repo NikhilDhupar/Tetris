@@ -122,7 +122,7 @@ class Shape: public Point
     }
     void moveright(char **board)
     {
-        clearshape(board);
+        clearshape(board);clearshape(board);
         for(int i=0;i<4;i++)
         {
             shape[i].y++;
@@ -256,11 +256,70 @@ class Line: public Shape
     }
     virtual void rotateright(char **board)
     {
-
+        clearshape(board);
+        if(type == 0)
+        {
+            shape[1].x--; shape[1].y++;
+            shape[2].x-=2; shape[2].y+=2;
+            shape[3].x-=3; shape[3].y+=3;
+            type = 1;
+            if(!verifyboard(board))
+            {
+                type = 0;
+                shape[1].x++; shape[1].y--;
+                shape[2].x+=2; shape[2].y-=2;
+                shape[3].x+=3; shape[3].y-=3;
+            }
+        }
+        else
+        {
+            type = 0;
+            shape[1].x++; shape[1].y--;
+            shape[2].x+=2; shape[2].y-=2;
+            shape[3].x+=3; shape[3].y-=3;
+            if(!verifyboard(board))
+            {
+                shape[1].x--; shape[1].y++;
+                shape[2].x-=2; shape[2].y+=2;
+                shape[3].x-=3; shape[3].y+=3;
+                type = 1;
+            }
+        }
+        putonboard(board);
     }
+    
     virtual void rotateleft(char **board)
     {
-
+        clearshape(board);
+        if(type == 0)
+        {
+            shape[1].x--; shape[1].y++;
+            shape[2].x-=2; shape[2].y+=2;
+            shape[3].x-=3; shape[3].y+=3;
+            type = 1;
+            if(!verifyboard(board))
+            {
+                type = 0;
+                shape[1].x++; shape[1].y--;
+                shape[2].x+=2; shape[2].y-=2;
+                shape[3].x+=3; shape[3].y-=3;
+            }
+        }
+        else
+        {
+            type = 0;
+            shape[1].x++; shape[1].y--;
+            shape[2].x+=2; shape[2].y-=2;
+            shape[3].x+=3; shape[3].y-=3;
+            if(!verifyboard(board))
+            {
+                shape[1].x--; shape[1].y++;
+                shape[2].x-=2; shape[2].y+=2;
+                shape[3].x-=3; shape[3].y+=3;
+                type = 1;
+            }
+        }
+        putonboard(board);
     }
 };
 
@@ -471,6 +530,22 @@ int main()
         else if(userinput == 'e')
         {
             break;
+        }
+        else if(userinput == 'a')
+        {
+            s->rotateleft(board);
+        }
+        else if(userinput == 'c')
+        {
+            s->rotateright(board);
+        }
+        else if(userinput == 'z')
+        {
+            //undo changes
+        }
+        else if(userinput == 'x')
+        {
+            //redo changes
         }
         if(s->movedown(board,memory))
         {
