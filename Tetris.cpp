@@ -37,7 +37,7 @@ void printboard(char **board)
 {
     int i,j;
     cout<<"\n\n";
-    for(i=1;i<board_rows;i++)
+    for(i=0;i<board_rows;i++)
     {
         for(j=0;j<board_cols;j++)
         {
@@ -167,6 +167,13 @@ class Shape: public Point
             board[shape[i].x][shape[i].y]='#';
         }
     }
+
+    virtual void rotateright(char **board)
+    {}
+
+    virtual void rotateleft(char **board)
+    {}
+
     void clearshape(char **board)
     {
         for(int i=0;i<4;i++)
@@ -211,6 +218,10 @@ class Shape: public Point
                 }
                 board[0] = new char[board_cols];
                 board[0][0]=board[0][board_cols-1]='*';
+                for(int j=1;j<board_cols-1;j++)
+                {
+                    board[0][j]=' ';
+                }
                 memory[0]=0;
             }
         }
@@ -243,6 +254,14 @@ class Line: public Shape
             shape[3].x=start_x;shape[3].y=start_y+3;
         }
     }
+    virtual void rotateright(char **board)
+    {
+
+    }
+    virtual void rotateleft(char **board)
+    {
+
+    }
 };
 
 class Square: public Shape
@@ -255,6 +274,8 @@ class Square: public Shape
         shape[2].x=start_x+0;shape[2].y=start_y+1;
         shape[3].x=start_x+1;shape[3].y=start_y+1;
     }
+    virtual void rotateright(char **board){}
+    virtual void rotateleft(char **board){}
 };
 
 class Lshape: public Shape
@@ -292,6 +313,14 @@ class Lshape: public Shape
             shape[2].x=start_x+1;shape[2].y=start_y+2;
             shape[3].x=start_x;shape[3].y=start_y+2;
         }
+    }
+    virtual void rotateright(char **board)
+    {
+
+    }
+    virtual void rotateleft(char **board)
+    {
+
     }
 };
 
@@ -331,6 +360,14 @@ class Tshape: public Shape
             shape[3].x=start_x+1;shape[3].y=start_y+1;
         }
     }
+    virtual void rotateright(char **board)
+    {
+
+    }
+    virtual void rotateleft(char **board)
+    {
+
+    }
 };
 
 class Sshape: public Shape
@@ -356,6 +393,14 @@ class Sshape: public Shape
             shape[2].x=start_x+1;shape[2].y=start_y+1;
             shape[3].x=start_x+1;shape[3].y=start_y;
         }
+    }
+    virtual void rotateright(char **board)
+    {
+
+    }
+    virtual void rotateleft(char **board)
+    {
+        
     }
 };
 
