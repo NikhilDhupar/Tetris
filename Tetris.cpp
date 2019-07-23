@@ -547,7 +547,67 @@ class Tshape: public Shape
     }
     virtual void rotateright(char **board)
     {
-
+        clearshape(board);
+        if(type==0)
+        {
+            shape[0].y+=1;
+            shape[1].x++;
+            shape[2].x+=2;shape[2].y-=1;
+            shape[3].y-=1;
+            type=1;
+            if(!verifyboard(board))
+            {
+                shape[0].y-=1;
+                shape[1].x--;
+                shape[2].x-=2;shape[2].y+=1;
+                shape[3].y+=1;
+                type=0;
+            }
+        }
+        else if(type == 1)
+        {
+            shape[0].x+=1;shape[0].y+=1;
+            shape[2].x-=1;shape[2].y-=1;
+            shape[3].x-=1;shape[3].y+=1;
+            type=2;
+            if(!verifyboard(board))
+            {
+                shape[0].x-=1;shape[0].y-=1;
+                shape[2].x+=1;shape[2].y+=1;
+                shape[3].x+=1;shape[3].y-=1;
+                type=1;
+            }
+        }
+        else if(type == 2)
+        {
+            shape[0].x+=1;shape[0].y-=2;
+            shape[1].y-=1;
+            shape[2].x-=1;
+            shape[3].x+=1;
+            type=3;
+            if(!verifyboard(board))
+            {
+                shape[0].x-=1;shape[0].y+=2;
+                shape[1].y+=1;
+                shape[2].x+=1;
+                shape[3].x-=1;
+                type=2;
+            }
+        }
+        else
+        {
+            shape[0].x-=2;
+            shape[1].x-=1;shape[1].y+=1;
+            shape[2].y+=2;
+            type=0;
+            if(!verifyboard(board))
+            {
+                shape[0].x+=2;
+                shape[1].x+=1;shape[1].y-=1;
+                shape[2].y-=2;
+                type=1;
+            }
+        }
     }
     virtual void rotateleft(char **board)
     {
