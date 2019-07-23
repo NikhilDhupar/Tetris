@@ -701,11 +701,40 @@ class Sshape: public Shape
     }
     virtual void rotateright(char **board)
     {
-
+        clearshape(board);
+        if(type==0)
+        {
+            shape[0].y+=2;
+            shape[1].x-=1;shape[1].y+=1;
+            shape[3].x-=1;shape[3].y-=1;
+            type=1;
+            if(!verifyboard(board))
+            {
+                shape[0].y-=2;
+                shape[1].x+=1;shape[1].y-=1;
+                shape[3].x+=1;shape[3].y+=1;
+                type=0;
+            }
+        }
+        else
+        {
+            shape[0].y-=2;
+            shape[1].x+=1;shape[1].y-=1;
+            shape[3].x+=1;shape[3].y+=1;
+            type=0;
+            if(!verifyboard(board))
+            {
+                shape[0].y+=2;
+                shape[1].x-=1;shape[1].y+=1;
+                shape[3].x-=1;shape[3].y-=1;
+                type=1;
+            }
+        }
+        
     }
     virtual void rotateleft(char **board)
     {
-        
+        rotateright(board);
     }
 };
 
